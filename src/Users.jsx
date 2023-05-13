@@ -1,22 +1,28 @@
 import { useState, useEffect } from "react";
 import "./Users.css";
 
-export default function Cards() {
+export default function Users({ currentPage }) {
+  const [total, setTotal] = useState(0);
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    getData();
+    getData(currentPage);
   });
 
-  async function getData() {
+  async function getData(currentPage) {
     const res = await fetch("mockdata.json");
     const resdata = await res.json();
-    setData(resdata);
+    const currentPageData = await resdata.slice(
+      20 * (currentPage - 1),
+      20 * currentPage
+    );
+    setTotal(resdata.length);
+    setData(currentPageData);
   }
 
   return (
     <div>
-      <span className="total">Total: {data.length}</span>
+      <span className="total">Total: {total}</span>
       <ul className="users-container">
         {data.map((user) => (
           <li key={user.id} className="card">
