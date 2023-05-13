@@ -6,22 +6,43 @@ export default function Users({ currentPage }) {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    getData(currentPage);
-  });
+    async function getData(currentPage) {
+      const res = await fetch("mockdata.json");
+      const resdata = await res.json();
+      const currentPageData = await resdata.slice(
+        20 * (currentPage - 1),
+        20 * currentPage
+      );
+      setTotal(resdata.length);
+      setData(currentPageData);
+    }
 
-  async function getData(currentPage) {
-    const res = await fetch("mockdata.json");
-    const resdata = await res.json();
-    const currentPageData = await resdata.slice(
-      20 * (currentPage - 1),
-      20 * currentPage
-    );
-    setTotal(resdata.length);
-    setData(currentPageData);
+    getData(currentPage);
+  }, []);
+
+  function liveSearch() {
+    const allNames = document.querySelectorAll(".name");
+    let searchQuery = document.querySelector("#search").value;
+    for (let name of allNames) {
+      if (name.innerHTML.toLowerCase().includes(searchQuery.toLowerCase())) {
+        name.parentElement.parentElement.classList.remove("hide");
+      } else {
+        name.parentElement.parentElement.classList.add("hide");
+      }
+    }
   }
 
   return (
     <div>
+      <form action="">
+        <label htmlFor="search">Search by Name:</label>
+        <input
+          type="text"
+          name="search"
+          id="search"
+          onChange={() => liveSearch()}
+        />
+      </form>
       <span className="total">Total: {total}</span>
       <ul className="users-container">
         {data.map((user) => (
