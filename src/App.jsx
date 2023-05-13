@@ -1,7 +1,13 @@
+import Users from "./Users";
 import "./App.css";
 
 function App() {
-  return <h1>FORMTEAM</h1>;
+  return (
+    <div>
+      <h1>FORMTEAM APP</h1>
+      <Users />
+    </div>
+  );
 }
 
 export default App;
