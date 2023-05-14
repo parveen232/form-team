@@ -1,6 +1,12 @@
-.total {
+.total,
+#search-label {
   font-size: 20px;
   margin: 20px;
+}
+
+#search {
+  padding: 5px 20px;
+  font-size: 18px;
 }
 
 .users-container {
