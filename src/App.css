@@ -1,3 +1,13 @@
+.logo {
+  display: block;
+  margin-bottom: 30px;
+  font-size: 3.2em;
+  line-height: 1.1;
+  text-align: center;
+  color: #b9b9b9;
+  text-decoration: none;
+}
+
 .pagination {
   margin-top: 50px;
   display: flex;
@@ -12,4 +22,17 @@ button {
 .btn {
   padding: 10px 20px;
   font-size: 18px;
+}
+
+.home-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.team-btn {
+  align-self: flex-end;
+  background-color: #d4d4d4;
+  color: #000;
+  text-decoration: none;
+  border-radius: 15px;
 }

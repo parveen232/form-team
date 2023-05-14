@@ -1,3 +1,5 @@
+import "../styles/Cards.css";
+
 export default function Cards({ data }) {
   return (
     <ul className="users-container">
@@ -16,6 +18,11 @@ export default function Cards({ data }) {
             <span className="available">
               Available: {user.available.toString()}
             </span>
+            {user.available == true ? (
+              <button className="add-btn">Add</button>
+            ) : (
+              <div></div>
+            )}
           </div>
         </li>
       ))}
