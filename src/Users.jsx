@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import "./Users.css";
 import Cards from "./Cards";
+import fetchDomainList from "./fetchDomainList";
+import Filter from "./Filter";
 
 export default function Users({ currentPage, setCurrentPage, setDisableNext }) {
   const [initialData, setInitialData] = useState([]);
@@ -17,7 +19,7 @@ export default function Users({ currentPage, setCurrentPage, setDisableNext }) {
         20 * (currentPage - 1),
         20 * currentPage
       );
-      setDisableNext(false)
+      setDisableNext(false);
       setInitialData(resData);
       setTotal(resData.length);
       setData(currentPageData);
@@ -62,9 +64,11 @@ export default function Users({ currentPage, setCurrentPage, setDisableNext }) {
     setLiveSearch(true);
   }
 
+  const domains = fetchDomainList(initialData);
+
   return (
     <div>
-      <form action="">
+      <form action="" onSubmit={(e) => e.preventDefault()}>
         <label htmlFor="search" id="search-label">
           Search by Name:
         </label>
@@ -75,6 +79,7 @@ export default function Users({ currentPage, setCurrentPage, setDisableNext }) {
           onChange={() => liveSearchFun()}
         />
       </form>
+      <Filter domains={domains} />
       <span className="total">Total: {total}</span>
       <Cards data={data} />
     </div>
