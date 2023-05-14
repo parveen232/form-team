@@ -7,7 +7,7 @@ import fetchGenderList from "../fetchGenderList";
 import Search from "./Search";
 import Pagination from "./Pagination";
 
-export default function Users() {
+export default function Users({ teamData, setTeamData }) {
   const [currentPage, setCurrentPage] = useState(1);
   const [disableNext, setDisableNext] = useState(false);
   const [total, setTotal] = useState(usersData.length);
@@ -40,6 +40,7 @@ export default function Users() {
       setTotal(searchingData.length);
       pagination(searchingData, currentPage);
     } else {
+      setTotal(usersData.length);
       pagination(usersData, currentPage);
     }
   }, [currentPage, searchValue]);
@@ -90,7 +91,7 @@ export default function Users() {
         </form>
       </div>
       <span className="total">Total: {total}</span>
-      <Cards data={data} />
+      <Cards data={data} teamData={teamData} setTeamData={setTeamData} />
       <Pagination
         currentPage={currentPage}
         disableNext={disableNext}

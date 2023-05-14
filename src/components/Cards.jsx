@@ -1,6 +1,6 @@
 import "../styles/Cards.css";
 
-export default function Cards({ data }) {
+export default function Cards({ data, teamData, setTeamData }) {
   return (
     <ul className="users-container">
       {data.map((user) => (
@@ -19,7 +19,22 @@ export default function Cards({ data }) {
               Available: {user.available.toString()}
             </span>
             {user.available == true ? (
-              <button className="add-btn">Add</button>
+              <button
+                className="add-btn"
+                onClick={() => {
+                  if (teamData.length == 0) {
+                    setTeamData([user]);
+                  } else {
+                    if (user.domain == teamData[0].domain) {
+                      setTeamData((item) => [...item, user]);
+                    } else {
+                      alert(`choose unique -> ${teamData[0].domain}`);
+                    }
+                  }
+                }}
+              >
+                Add
+              </button>
             ) : (
               <div></div>
             )}

@@ -1,3 +1,10 @@
-export default function Team() {
-  return <h1>Team</h1>;
+import Cards from "../components/Cards";
+
+export default function Team({ teamData }) {
+  return (
+    <>
+      <h2>{teamData[0].domain} Team</h2>
+      <Cards data={teamData} />
+    </>
+  );
 }
