@@ -30,16 +30,14 @@ export default function Users({ teamData, setTeamData }) {
       }
     }
 
-    if (searchValue !== "") {
-      const searchingData = [];
-      for (let user of usersData) {
-        const name = `${user.first_name} ${user.last_name}`;
-        if (name.toLowerCase().includes(searchValue.toLowerCase())) {
-          searchingData.push(user);
-        }
-      }
-      setTotal(searchingData.length);
-      pagination(searchingData, currentPage);
+    if (filterData.length > 0 && searchValue !== "") {
+      const fsData = seater(filterData, searchValue);
+      setTotal(fsData.length);
+      pagination(fsData, currentPage);
+    } else if (searchValue !== "") {
+      const sData = seater(usersData, searchValue);
+      setTotal(sData.length);
+      pagination(sData, currentPage);
     } else if (filterData.length > 0) {
       setTotal(filterData.length);
       pagination(filterData, currentPage);
@@ -48,6 +46,17 @@ export default function Users({ teamData, setTeamData }) {
       pagination(usersData, currentPage);
     }
   }, [currentPage, searchValue, filterData]);
+
+  function seater(data, seaVal) {
+    const activeData = [];
+    for (let user of data) {
+      const name = `${user.first_name} ${user.last_name}`;
+      if (name.toLowerCase().includes(seaVal.toLowerCase())) {
+        activeData.push(user);
+      }
+    }
+    return activeData;
+  }
 
   return (
     <div>
