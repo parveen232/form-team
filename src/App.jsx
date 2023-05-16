@@ -7,7 +7,6 @@ import { useState } from "react";
 
 function App() {
   const [teamData, setTeamData] = useState([]);
-  console.log(teamData);
   return (
     <div>
       <Link to="/" className="logo">
@@ -18,7 +17,10 @@ function App() {
           path="/"
           element={<Home teamData={teamData} setTeamData={setTeamData} />}
         />
-        <Route path="/team" element={<Team teamData={teamData} />} />
+        <Route
+          path="/team"
+          element={<Team teamData={teamData} setTeamData={setTeamData} />}
+        />
       </Routes>
     </div>
   );

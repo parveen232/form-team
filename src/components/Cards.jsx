@@ -34,7 +34,7 @@ export default function Cards({ data, teamData, setTeamData }) {
             </span>
             {user.available == true ? (
               <button className="add-btn" onClick={() => handleOnClick(user)}>
-                Add
+                {teamData.includes(user) ? "Added" : "Add"}
               </button>
             ) : (
               <div></div>
